@@ -1,6 +1,7 @@
 import { Component } from 'react';
-
+import CardList from './components/CardList/CardList';
 import './App.css';
+import Search from './components/Search/Search';
 
 class App extends Component {
   constructor() {
@@ -12,6 +13,10 @@ class App extends Component {
     };
   }
 
+  handleChange = (e) => {
+    this.setState({ search: e.target.value.toLocaleLowerCase() });
+  };
+
   componentDidMount() {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((res) => res.json())
@@ -19,26 +24,15 @@ class App extends Component {
   }
 
   render() {
-    const filteredMonsters = this.state.monsters.filter((monster) => monster.name.toLocaleLowerCase().includes(this.state.search));
+    const { monsters, search } = this.state;
+    const { handleChange } = this;
+
+    const filteredMonsters = monsters.filter((monster) => monster.name.toLocaleLowerCase().includes(search));
 
     return (
       <div className="App">
-        <input
-          type="text"
-          name="search"
-          className="search"
-          placeholder="Search monster"
-          onChange={(e) => {
-            this.setState({ search: e.target.value.toLocaleLowerCase() });
-          }}
-        />
-        {filteredMonsters.map((monster) => {
-          return (
-            <div key={monster.id}>
-              <h1>{monster.name}</h1>
-            </div>
-          );
-        })}
+        <Search className="search" placeholder="Search monster" handleChange={handleChange} />
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import { Component } from 'react';
 
+import './Search.css';
 class Search extends Component {
   render() {
     const { className, placeholder, handleChange } = this.props;

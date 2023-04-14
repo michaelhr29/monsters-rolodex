@@ -1,0 +1,18 @@
+.monster {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 25px;
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+  text-align: center;
+}
+
+.monster > h2 {
+  font-size: 1.75rem;
+}
+
+.monster:hover {
+  transform: scale(1.05);
+}
